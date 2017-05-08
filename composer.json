@@ -1,0 +1,11 @@
+{
+    "name": "alekseykuleshov/commweb",
+    "description": "Commweb api sdk",
+    "autoload": {
+        "classmap": ["src/"]
+    },
+    "minimum-stability": "stable",
+    "require": {
+        "guzzlehttp/guzzle": "6.2.3"
+    }
+}
