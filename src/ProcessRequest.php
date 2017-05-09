@@ -1,4 +1,4 @@
-<?php namespace AK\Commweb;
+<?php namespace ATDev\Commweb;
 
 abstract class ProcessRequestAbstract extends RequestAbstract {
 
@@ -7,6 +7,8 @@ abstract class ProcessRequestAbstract extends RequestAbstract {
 	public function setOldTransaction(Transaction $oldTransaction) {
 
 		$this->oldTransaction = $oldTransaction;
+
+		return $this;
 	}
 
 	public function jsonSerialize() {

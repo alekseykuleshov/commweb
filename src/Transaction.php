@@ -1,4 +1,4 @@
-<?php namespace AK\Commweb;
+<?php namespace ATDev\Commweb;
 
 class Transaction implements \JsonSerializable {
 
@@ -16,6 +16,8 @@ class Transaction implements \JsonSerializable {
 	public function setId($id) {
 
 		$this->id = $id;
+
+		return $this;
 	}
 
 	public function getId() {
@@ -26,11 +28,15 @@ class Transaction implements \JsonSerializable {
 	public function setAmount($amount) {
 
 		$this->amount = $amount;
+
+		return $this;
 	}
 
 	public function setCurrency($currency) {
 
 		$this->currency = $currency;
+
+		return $this;
 	}
 
 	public function jsonSerialize() {

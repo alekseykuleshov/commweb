@@ -1,4 +1,4 @@
-<?php namespace AK\Commweb;
+<?php namespace ATDev\Commweb;
 
 abstract class RequestAbstract implements \JsonSerializable {
 
@@ -23,26 +23,36 @@ abstract class RequestAbstract implements \JsonSerializable {
 	public function setTransaction($transaction) {
 
 		$this->transaction = $transaction;
+
+		return $this;
 	}
 
 	public function setOrder($order) {
 
 		$this->order = $order;
+
+		return $this;
 	}
 
 	public function setMethod($method) {
 
 		$this->method = $method;
+
+		return $this;
 	}
 
 	public function setVersion($version) {
 
 		$this->version = $version;
+
+		return $this;
 	}
 
 	public function setUrl($url) {
 
 		$this->url = $url;
+
+		return $this;
 	}
 
 	public function setMerchant($merchant) {
@@ -56,6 +66,8 @@ abstract class RequestAbstract implements \JsonSerializable {
 			$this->setTestMode(false);
 			$this->merchant = $merchant;
 		}
+
+		return $this;
 	}
 
 	public function getMerchant() {
@@ -66,11 +78,15 @@ abstract class RequestAbstract implements \JsonSerializable {
 	public function setApiPassword($password) {
 
 		$this->password = $password;
+
+		return $this;
 	}
 
 	public function setTestMode($testMode) {
 
 		$this->testMode = $testMode;
+
+		return $this;
 	}
 
 	public function getTestMode() {

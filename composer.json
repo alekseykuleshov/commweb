@@ -1,5 +1,5 @@
 {
-    "name": "alekseykuleshov/commweb",
+    "name": "atdev/commweb",
     "description": "Commweb api sdk",
     "autoload": {
         "classmap": ["src/"]

@@ -1,4 +1,4 @@
-<?php namespace AK\Commweb;
+<?php namespace ATDev\Commweb;
 
 class SourceOfFunds implements \JsonSerializable {
 
@@ -7,18 +7,27 @@ class SourceOfFunds implements \JsonSerializable {
 
 	public function __construct($type = null, Card $card = null) {
 
-		$this->setType($type);
-		$this->setCard($card);
+		if ( ! empty($type)) {
+			$this->setType($type);
+		}
+
+		if ( ! empty($card)) {
+			$this->setCard($card);
+		}
 	}
 
 	public function setType($type) {
 
 		$this->type = $type;
+
+		return $this;
 	}
 
 	public function setCard(Card $card) {
 
 		$this->card = $card;
+
+		return $this;
 	}
 
 	public function jsonSerialize() {

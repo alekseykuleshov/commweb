@@ -1,4 +1,4 @@
-<?php namespace AK\Commweb;
+<?php namespace ATDev\Commweb;
 
 class Card implements \JsonSerializable {
 
@@ -18,21 +18,29 @@ class Card implements \JsonSerializable {
 	public function setNumber($number) {
 
 		$this->number = $number;
+
+		return $this;
 	}
 
 	public function setMonth($month) {
 
 		$this->month = $month;
+
+		return $this;
 	}
 
 	public function setYear($year) {
 
 		$this->year = $year;
+
+		return $this;
 	}
 
 	public function setSecurityCode($securityCode) {
 
 		$this->securityCode = $securityCode;
+
+		return $this;
 	}
 
 	public function jsonSerialize() {

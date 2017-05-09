@@ -1,4 +1,4 @@
-<?php namespace AK\Commweb;
+<?php namespace ATDev\Commweb;
 
 abstract class PayRequestAbstract extends RequestAbstract {
 
@@ -7,6 +7,8 @@ abstract class PayRequestAbstract extends RequestAbstract {
 	public function setSourceOfFunds(SourceOfFunds $sourceOfFunds) {
 
 		$this->sourceOfFunds = $sourceOfFunds;
+
+		return $this;
 	}
 
 	public function jsonSerialize() {
