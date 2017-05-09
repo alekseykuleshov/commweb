@@ -6,6 +6,13 @@ class Order implements \JsonSerializable {
 	private $amount;
 	private $currency = 'AUD';
 
+	/**
+	 * Class constructor
+	 *
+	 * @param string $id Order id
+	 * @param string $amount Order amount
+	 * @param string $currency Order currency
+	 */
 	public function __construct($id, $amount, $currency) {
 
 		$this->setId($id);
@@ -13,6 +20,13 @@ class Order implements \JsonSerializable {
 		$this->setCurrency($currency);
 	}
 
+	/**
+	 * Sets order id
+	 *
+	 * @param string $id
+	 *
+	 * @return \ATDev\Commweb\Order
+	 */
 	public function setId($id) {
 
 		$this->id = $id;
@@ -20,11 +34,23 @@ class Order implements \JsonSerializable {
 		return $this;
 	}
 
+	/**
+	 * Gets order id
+	 *
+	 * @return string
+	 */
 	public function getId() {
 
 		return $this->id;
 	}
 
+	/**
+	 * Sets order amount
+	 *
+	 * @param string $amount
+	 *
+	 * @return \ATDev\Commweb\Order
+	 */
 	public function setAmount($amount) {
 
 		$this->amount = $amount;
@@ -32,6 +58,13 @@ class Order implements \JsonSerializable {
 		return $this;
 	}
 
+	/**
+	 * Sets order currency
+	 *
+	 * @param string $currency
+	 *
+	 * @return \ATDev\Commweb\Order
+	 */
 	public function setCurrency($currency) {
 
 		$this->currency = $currency;
@@ -39,6 +72,11 @@ class Order implements \JsonSerializable {
 		return $this;
 	}
 
+	/**
+	 * Specifies what has to be returned on serialization to json
+	 *
+	 * @return array Data to serialize
+	 */
 	public function jsonSerialize() {
 
 		return [

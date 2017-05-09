@@ -7,6 +7,14 @@ class Card implements \JsonSerializable {
 	private $year;
 	private $securityCode;
 
+	/**
+	 * Class constructor
+	 *
+	 * @param string $number Card number
+	 * @param string $month Expiration month
+	 * @param string $year Expiration year
+	 * @param string $securityCode Card security code
+	 */
 	public function __construct($number, $month, $year, $securityCode) {
 
 		$this->setNumber($number);
@@ -15,6 +23,13 @@ class Card implements \JsonSerializable {
 		$this->setSecurityCode($securityCode);
 	}
 
+	/**
+	 * Sets card number
+	 *
+	 * @param string $number Card number
+	 *
+	 * @return \ATDev\Commweb\Card
+	 */
 	public function setNumber($number) {
 
 		$this->number = $number;
@@ -22,6 +37,13 @@ class Card implements \JsonSerializable {
 		return $this;
 	}
 
+	/**
+	 * Sets expiration month
+	 *
+	 * @param string $month Expiration month
+	 *
+	 * @return \ATDev\Commweb\Card
+	 */
 	public function setMonth($month) {
 
 		$this->month = $month;
@@ -29,6 +51,13 @@ class Card implements \JsonSerializable {
 		return $this;
 	}
 
+	/**
+	 * Sets expiration year
+	 *
+	 * @param string $year Expiration year
+	 *
+	 * @return \ATDev\Commweb\Card
+	 */
 	public function setYear($year) {
 
 		$this->year = $year;
@@ -36,6 +65,13 @@ class Card implements \JsonSerializable {
 		return $this;
 	}
 
+	/**
+	 * Sets card security code
+	 *
+	 * @param string $securityCode Card security code
+	 *
+	 * @return \ATDev\Commweb\Card
+	 */
 	public function setSecurityCode($securityCode) {
 
 		$this->securityCode = $securityCode;
@@ -43,6 +79,11 @@ class Card implements \JsonSerializable {
 		return $this;
 	}
 
+	/**
+	 * Specifies what has to be returned on serialization to json
+	 *
+	 * @return array Data to serialize
+	 */
 	public function jsonSerialize() {
 
 		return [

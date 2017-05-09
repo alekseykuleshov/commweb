@@ -4,6 +4,13 @@ abstract class ProcessRequestAbstract extends RequestAbstract {
 
 	private $oldTransaction;
 
+	/**
+	 * Sets old transaction for request to process
+	 *
+	 * @param \ATDev\Commweb\Transaction $oldTransaction
+	 *
+	 * @return \ATDev\Commweb\ProcessRequestAbstract
+	 */
 	public function setOldTransaction(Transaction $oldTransaction) {
 
 		$this->oldTransaction = $oldTransaction;
@@ -11,6 +18,11 @@ abstract class ProcessRequestAbstract extends RequestAbstract {
 		return $this;
 	}
 
+	/**
+	 * Specifies what has to be returned on serialization to json
+	 *
+	 * @return array Data to serialize
+	 */
 	public function jsonSerialize() {
 
 		return [

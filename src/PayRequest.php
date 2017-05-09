@@ -4,6 +4,13 @@ abstract class PayRequestAbstract extends RequestAbstract {
 
 	private $sourceOfFunds;
 
+	/**
+	 * Sets source of funds of request
+	 *
+	 * @param \ATDev\Commweb\SourceOfFunds $sourceOfFunds
+	 *
+	 * @return \ATDev\Commweb\PayRequestAbstract
+	 */
 	public function setSourceOfFunds(SourceOfFunds $sourceOfFunds) {
 
 		$this->sourceOfFunds = $sourceOfFunds;
@@ -11,6 +18,11 @@ abstract class PayRequestAbstract extends RequestAbstract {
 		return $this;
 	}
 
+	/**
+	 * Specifies what has to be returned on serialization to json
+	 *
+	 * @return array Data to serialize
+	 */
 	public function jsonSerialize() {
 
 		return [

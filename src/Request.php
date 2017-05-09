@@ -15,25 +15,51 @@ abstract class RequestAbstract implements \JsonSerializable {
 	protected $order;
 	protected $transaction;
 
+	/**
+	 * Class constructor
+	 *
+	 * @param string $merchant Merchant id
+	 */
 	public function __construct($merchant) {
 
 		$this->setMerchant($merchant);
 	}
 
-	public function setTransaction($transaction) {
+	/**
+	 * Sets transaction for the request
+	 *
+	 * @param \ATDev\Commweb\Transaction $transaction
+	 *
+	 * @return \ATDev\Commweb\RequestAbstract
+	 */
+	public function setTransaction(Transaction $transaction) {
 
 		$this->transaction = $transaction;
 
 		return $this;
 	}
 
-	public function setOrder($order) {
+	/**
+	 * Sets order for the request
+	 *
+	 * @param \ATDev\Commweb\Order $order
+	 *
+	 * @return \ATDev\Commweb\RequestAbstract
+	 */
+	public function setOrder(Order $order) {
 
 		$this->order = $order;
 
 		return $this;
 	}
 
+	/**
+	 * Sets request method
+	 *
+	 * @param string $method
+	 *
+	 * @return \ATDev\Commweb\RequestAbstract
+	 */
 	public function setMethod($method) {
 
 		$this->method = $method;
@@ -41,6 +67,13 @@ abstract class RequestAbstract implements \JsonSerializable {
 		return $this;
 	}
 
+	/**
+	 * Sets api version to request
+	 *
+	 * @param string $version
+	 *
+	 * @return \ATDev\Commweb\RequestAbstract
+	 */
 	public function setVersion($version) {
 
 		$this->version = $version;
@@ -48,6 +81,13 @@ abstract class RequestAbstract implements \JsonSerializable {
 		return $this;
 	}
 
+	/**
+	 * Sets api url
+	 *
+	 * @param string $url
+	 *
+	 * @return \ATDev\Commweb\RequestAbstract
+	 */
 	public function setUrl($url) {
 
 		$this->url = $url;
@@ -55,6 +95,13 @@ abstract class RequestAbstract implements \JsonSerializable {
 		return $this;
 	}
 
+	/**
+	 * Sets merchant id
+	 *
+	 * @param string $merchant Merchant id
+	 *
+	 * @return \ATDev\Commweb\RequestAbstract
+	 */
 	public function setMerchant($merchant) {
 
 		if (substr($merchant, 0, 4) == "TEST") {
@@ -70,11 +117,23 @@ abstract class RequestAbstract implements \JsonSerializable {
 		return $this;
 	}
 
+	/**
+	 * Gets merchant id
+	 *
+	 * @return string
+	 */
 	public function getMerchant() {
 
 		return ($this->testMode) ? ("TEST" . $this->merchant) : $this->merchant;
 	}
 
+	/**
+	 * Set api password
+	 *
+	 * @param string $password
+	 *
+	 * @return \ATDev\Commweb\RequestAbstract
+	 */
 	public function setApiPassword($password) {
 
 		$this->password = $password;
@@ -82,6 +141,13 @@ abstract class RequestAbstract implements \JsonSerializable {
 		return $this;
 	}
 
+	/**
+	 * Sets test mode
+	 *
+	 * @param bool $testMode
+	 *
+	 * @return \ATDev\Commweb\RequestAbstract
+	 */
 	public function setTestMode($testMode) {
 
 		$this->testMode = $testMode;
@@ -89,11 +155,21 @@ abstract class RequestAbstract implements \JsonSerializable {
 		return $this;
 	}
 
+	/**
+	 * Gets test mode
+	 *
+	 * @return bool
+	 */
 	public function getTestMode() {
 
 		return $this->testMode;
 	}
 
+	/**
+	 * Sends request to api
+	 *
+	 * @return \ATDev\Commweb\RequestAbstract
+	 */
 	public function send() {
 
 		$client = new \GuzzleHttp\Client();
@@ -109,16 +185,31 @@ abstract class RequestAbstract implements \JsonSerializable {
 		return $this;
 	}
 
+	/**
+	 * Gets user name for the api
+	 *
+	 * @return string
+	 */
 	public function getApiUsername() {
 
 		return "merchant." . $this->getMerchant();
 	}
 
+	/**
+	 * Gets password for the api
+	 *
+	 * @return string
+	 */
 	public function getApiPassword() {
 
 		return $this->password;
 	}
 
+	/**
+	 * Gets full api url for the request
+	 * 
+	 * @return string
+	 */
 	private function getApiUrl() {
 
 		$url = $this->url;
