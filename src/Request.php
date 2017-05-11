@@ -10,6 +10,8 @@ abstract class RequestAbstract implements \JsonSerializable {
 	private $password;
 	private $testMode = false;
 
+	private $error;
+
 	protected $apiOperation;
 
 	protected $order;
@@ -178,11 +180,35 @@ abstract class RequestAbstract implements \JsonSerializable {
 			$this->getApiUrl(),
 			[
 				"auth" => [$this->getApiUsername(), $this->getApiPassword()],
-				"json" => $this
+				"json" => $this,
+				"timeout" => 60,
+				"connect_timeout" => 60,
+				"exceptions" => false
 			]
 		);
 
+		$code = $res->getStatusCode();
+		$body = $res->getBody()->getContents();
+
+		if ($code != 200) {
+
+			$this->error = $body;
+		} else {
+
+			$this->error = null;
+		}
+
 		return $this;
+	}
+
+	/**
+	 * Gets error
+	 *
+	 * @return string
+	 */
+	public function getError() {
+
+		return $this->error;
 	}
 
 	/**
@@ -207,7 +233,7 @@ abstract class RequestAbstract implements \JsonSerializable {
 
 	/**
 	 * Gets full api url for the request
-	 * 
+	 *
 	 * @return string
 	 */
 	private function getApiUrl() {
