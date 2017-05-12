@@ -1,54 +1,47 @@
 <?php namespace ATDev\Commweb;
 
 /**
- * Source of funds class
+ * An abstract source of funds class
  */
-class SourceOfFunds implements \JsonSerializable {
-
-	/** @var string Type of card funds source */
-	const TYPE_CARD = "CARD";
-
-	/** @var array Available funds source types */
-	private static $availableTypes = [
-		self::TYPE_CARD
-	];
+abstract class SourceOfFunds implements \JsonSerializable {
 
 	/** @var string Type of funds source */
-	private $type = "CARD";
+	protected $type;
+
+	/**
+	 * Specifies what has to be returned on serialization to json
+	 *
+	 * @return array Data to serialize
+	 */
+	public function jsonSerialize() {
+
+		return [
+			"type" => $this->type
+		];
+	}
+}
+
+/**
+ * Card source of funds class
+ */
+class SourceOfFundsCard extends SourceOfFunds {
+
+	/** @var string Type of funds source */
+	protected $type = "CARD";
+
 	/** @var \ATDev\Commweb\Card Card as funds source */
 	private $card;
 
 	/**
 	 * Class constructor
 	 *
-	 * @param string|null $type Type of funds source
-	 * @param \ATDev\Commweb\Card|null $card
+	 * @param \ATDev\Commweb\Card $card
 	 */
-	public function __construct($type = null, Card $card = null) {
-
-		if ( ! empty($type) ) {
-			$this->setType($type);
-		}
+	public function __construct(Card $card) {
 
 		if ( ! empty($card) ) {
 			$this->setCard($card);
 		}
-	}
-
-	/**
-	 * Sets source of funds type
-	 *
-	 * @param string $type
-	 *
-	 * @return \ATDev\Commweb\SourceOfFunds
-	 */
-	public function setType($type) {
-
-		if ( in_array($type, self::$availableTypes) ) {
-			$this->type = $type;
-		}
-
-		return $this;
 	}
 
 	/**
@@ -61,7 +54,6 @@ class SourceOfFunds implements \JsonSerializable {
 	public function setCard(Card $card) {
 
 		$this->card = $card;
-		$this->setType(self::TYPE_CARD);
 
 		return $this;
 	}
@@ -73,20 +65,31 @@ class SourceOfFunds implements \JsonSerializable {
 	 */
 	public function jsonSerialize() {
 
-		$result = [];
-
-		if ( ! empty($this->type) ) {
-
-			$result["type"] = $this->type;
-		}
-
-		if ( ! empty($this->card) ) {
-
-			$result["provided"] = [
+		return [
+			"type" => $this->type,
+			"provided" => [
 				"card" => $this->card
-			];
-		}
+			]
+		];
+	}
+}
 
-		return $result;
+/**
+ * Card source of funds class for verification
+ */
+class SourceOfFundsCardVerify extends SourceOfFundsCard {
+
+	/**
+	 * Specifies what has to be returned on serialization to json
+	 *
+	 * @return array Data to serialize
+	 */
+	public function jsonSerialize() {
+
+		return [
+			"provided" => [
+				"card" => $this->card
+			]
+		];
 	}
 }
