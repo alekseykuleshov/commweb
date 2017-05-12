@@ -1,10 +1,17 @@
 <?php namespace ATDev\Commweb;
 
+/**
+ * Card class
+ */
 class Card implements \JsonSerializable {
 
+	/** @var string Card number */
 	private $number;
+	/** @var string Expiration month */
 	private $month;
+	/** @var string Expiration year */
 	private $year;
+	/** @var string Card security code */
 	private $securityCode;
 
 	/**

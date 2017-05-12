@@ -1,7 +1,11 @@
 <?php namespace ATDev\Commweb;
 
+/**
+ * An abstract class to process existing transactions
+ */
 abstract class ProcessRequestAbstract extends RequestAbstract {
 
+	/** @var \ATDev\Commweb\Transaction Old transaction data */
 	private $oldTransaction;
 
 	/**
@@ -32,17 +36,34 @@ abstract class ProcessRequestAbstract extends RequestAbstract {
 	}
 }
 
+/**
+ * Class to capture the transaction
+ */
 class CaptureRequest extends ProcessRequestAbstract {
 
 	protected $apiOperation = 'CAPTURE';
 }
 
+/**
+ * Class to refund the transaction
+ */
 class RefundRequest extends ProcessRequestAbstract {
 
 	protected $apiOperation = 'REFUND';
 }
 
+/**
+ * Class to void the transaction
+ */
 class VoidRequest extends ProcessRequestAbstract {
 
 	protected $apiOperation = 'VOID';
+}
+
+/**
+ * Class to update autorization transaction
+ */
+class UpdateAutorizationRequest extends ProcessRequestAbstract {
+
+	protected $apiOperation = 'UPDATE_AUTHORIZATION';
 }

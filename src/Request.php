@@ -1,21 +1,31 @@
 <?php namespace ATDev\Commweb;
 
+/**
+ * An abstract class which handles all requests to api
+ */
 abstract class RequestAbstract implements \JsonSerializable {
 
-	private $method = 'PUT';
-	private $version = 34;
-	private $url = "https://paymentgateway.commbank.com.au/api/rest/";
-
-	private $merchant;
-	private $password;
-	private $testMode = false;
-
-	private $error;
-
+	/** @var string Api operation, should be defined at child classes */
 	protected $apiOperation;
-
+	/** @var string Request method, can be overriden at child classes if required*/
+	protected $method = 'PUT';
+	/** @var string Subject order */
 	protected $order;
+	/** @var string Subject transaction */
 	protected $transaction;
+
+	/** @var string Api version */
+	private $version = 34;
+	/** @var string Api url */
+	private $url = "https://paymentgateway.commbank.com.au/api/rest/";
+	/** @var string Merchant id */
+	private $merchant;
+	/** @var string Api password */
+	private $password;
+	/** @var bool Test mode, "TEST" will be added to merchant id when sent to api */
+	private $testMode = false;
+	/** @var string|null Error message, empty if no error, some text if any */
+	private $error;
 
 	/**
 	 * Class constructor
@@ -51,20 +61,6 @@ abstract class RequestAbstract implements \JsonSerializable {
 	public function setOrder(Order $order) {
 
 		$this->order = $order;
-
-		return $this;
-	}
-
-	/**
-	 * Sets request method
-	 *
-	 * @param string $method
-	 *
-	 * @return \ATDev\Commweb\RequestAbstract
-	 */
-	public function setMethod($method) {
-
-		$this->method = $method;
 
 		return $this;
 	}
@@ -106,7 +102,7 @@ abstract class RequestAbstract implements \JsonSerializable {
 	 */
 	public function setMerchant($merchant) {
 
-		if (substr($merchant, 0, 4) == "TEST") {
+		if ( substr($merchant, 0, 4) == "TEST" ) {
 
 			$this->setTestMode(true);
 			$this->merchant = substr($merchant, 4, strlen($merchant) - 4);
@@ -190,7 +186,7 @@ abstract class RequestAbstract implements \JsonSerializable {
 		$code = $res->getStatusCode();
 		$body = $res->getBody()->getContents();
 
-		if ($code != 200) {
+		if ( $code != 200 ) {
 
 			$this->error = $body;
 		} else {

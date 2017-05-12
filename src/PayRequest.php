@@ -1,7 +1,11 @@
 <?php namespace ATDev\Commweb;
 
+/**
+ * An abstract class to init the transaction
+ */
 abstract class PayRequestAbstract extends RequestAbstract {
 
+	/** @var \ATDev\Commweb\SourceOfFunds Source of funds for the transaction */
 	private $sourceOfFunds;
 
 	/**
@@ -25,24 +29,39 @@ abstract class PayRequestAbstract extends RequestAbstract {
 	 */
 	public function jsonSerialize() {
 
-		return [
+		$result = [
 			"apiOperation" => $this->apiOperation,
-			"sourceOfFunds" => $this->sourceOfFunds,
-			"order" => $this->order,
+			"order" => $this->order
 		];
+
+		if ( ! empty($this->sourceOfFunds) ) {
+
+			$result["sourceOfFunds"] = $this->sourceOfFunds;
+		}
+
+		return $result;
 	}
 }
 
+/**
+ * Class to authorize the transaction
+ */
 class AuthorizeRequest extends PayRequestAbstract {
 
 	protected $apiOperation = 'AUTHORIZE';
 }
 
+/**
+ * Class to make payment transaction
+ */
 class PayRequest extends PayRequestAbstract {
 
 	protected $apiOperation = 'PAY';
 }
 
+/**
+ * Class just to verify card data before the transaction
+ */
 class VerifyRequest extends PayRequestAbstract {
 
 	protected $apiOperation = 'VERIFY';

@@ -1,9 +1,15 @@
 <?php namespace ATDev\Commweb;
 
+/**
+ * Transaction class
+ */
 class Transaction implements \JsonSerializable {
 
+	/** @var string Transaction id */
 	private $id;
+	/** @var string Transaction amount */
 	private $amount;
+	/** @var string Transaction currency */
 	private $currency = 'AUD';
 
 	/**
@@ -67,7 +73,10 @@ class Transaction implements \JsonSerializable {
 	 */
 	public function setCurrency($currency) {
 
-		$this->currency = $currency;
+		if ( in_array($currency, Currency::getAvailableCurrencies()) ) {
+			
+			$this->currency = $currency;
+		}
 
 		return $this;
 	}

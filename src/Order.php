@@ -1,9 +1,15 @@
 <?php namespace ATDev\Commweb;
 
+/**
+ * Order class
+ */
 class Order implements \JsonSerializable {
 
+	/** @var string Order id */
 	private $id;
+	/** @var string Order amount */
 	private $amount;
+	/** @var string Order currency */
 	private $currency = 'AUD';
 
 	/**
@@ -67,7 +73,10 @@ class Order implements \JsonSerializable {
 	 */
 	public function setCurrency($currency) {
 
-		$this->currency = $currency;
+		if ( in_array($currency, Currency::getAvailableCurrencies()) ) {
+			
+			$this->currency = $currency;
+		}
 
 		return $this;
 	}

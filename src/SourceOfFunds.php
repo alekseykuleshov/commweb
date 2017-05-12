@@ -1,8 +1,21 @@
 <?php namespace ATDev\Commweb;
 
+/**
+ * Source of funds class
+ */
 class SourceOfFunds implements \JsonSerializable {
 
+	/** @var string Type of card funds source */
+	const TYPE_CARD = "CARD";
+
+	/** @var array Available funds source types */
+	private static $availableTypes = [
+		self::TYPE_CARD
+	];
+
+	/** @var string Type of funds source */
 	private $type = "CARD";
+	/** @var \ATDev\Commweb\Card Card as funds source */
 	private $card;
 
 	/**
@@ -13,11 +26,11 @@ class SourceOfFunds implements \JsonSerializable {
 	 */
 	public function __construct($type = null, Card $card = null) {
 
-		if ( ! empty($type)) {
+		if ( ! empty($type) ) {
 			$this->setType($type);
 		}
 
-		if ( ! empty($card)) {
+		if ( ! empty($card) ) {
 			$this->setCard($card);
 		}
 	}
@@ -31,7 +44,9 @@ class SourceOfFunds implements \JsonSerializable {
 	 */
 	public function setType($type) {
 
-		$this->type = $type;
+		if ( in_array($type, self::$availableTypes) ) {
+			$this->type = $type;
+		}
 
 		return $this;
 	}
@@ -46,6 +61,7 @@ class SourceOfFunds implements \JsonSerializable {
 	public function setCard(Card $card) {
 
 		$this->card = $card;
+		$this->setType(self::TYPE_CARD);
 
 		return $this;
 	}
@@ -57,11 +73,20 @@ class SourceOfFunds implements \JsonSerializable {
 	 */
 	public function jsonSerialize() {
 
-		return [
-			"type" => $this->type,
-			"provided" => [
+		$result = [];
+
+		if ( ! empty($this->type) ) {
+
+			$result["type"] = $this->type;
+		}
+
+		if ( ! empty($this->card) ) {
+
+			$result["provided"] = [
 				"card" => $this->card
-			]
-		];
+			];
+		}
+
+		return $result;
 	}
 }
