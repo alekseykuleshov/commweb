@@ -9,7 +9,7 @@ class Currency {
 	const AUD = "AUD";
 
 	/** @var array Available currencies */
-	private static $availableCurrencies = [
+	private static $available = [
 		self::AUD
 	];
 
@@ -18,8 +18,8 @@ class Currency {
 	 *
 	 * @return array
 	 */
-	public static function getAvailableCurrencies() {
+	public static function getAvailable() {
 
-		return self::$availableCurrencies;
+		return self::$available;
 	}
 }

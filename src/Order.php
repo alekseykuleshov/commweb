@@ -81,7 +81,7 @@ class Order implements \JsonSerializable {
 	 */
 	public function setCurrency($currency) {
 
-		if ( in_array($currency, Currency::getAvailableCurrencies()) ) {
+		if ( in_array($currency, Currency::getAvailable()) ) {
 
 			$this->currency = $currency;
 		}
