@@ -21,8 +21,8 @@ class SourceOfFunds implements \JsonSerializable {
 	/**
 	 * Class constructor
 	 *
-	 * @param string $type Type of funds source
-	 * @param \ATDev\Commweb\Card $card
+	 * @param string|null $type Type of funds source
+	 * @param \ATDev\Commweb\Card|null $card
 	 */
 	public function __construct($type = null, Card $card = null) {
 

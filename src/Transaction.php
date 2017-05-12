@@ -16,14 +16,22 @@ class Transaction implements \JsonSerializable {
 	 * Class constructor
 	 *
 	 * @param string $id Transaction id
-	 * @param string $amount Transaction amount
-	 * @param string $currency Transaction currency
+	 * @param string|null $amount Transaction amount
+	 * @param string|null $currency Transaction currency
 	 */
-	public function __construct($id, $amount, $currency) {
+	public function __construct($id, $amount = null, $currency = null) {
 
 		$this->setId($id);
-		$this->setAmount($amount);
-		$this->setCurrency($currency);
+
+		if ( ! empty($amount) ) {
+
+			$this->setAmount($amount);
+		}
+
+		if ( ! empty($currency)) {
+
+			$this->setCurrency($currency);
+		}
 	}
 
 	/**
@@ -74,7 +82,7 @@ class Transaction implements \JsonSerializable {
 	public function setCurrency($currency) {
 
 		if ( in_array($currency, Currency::getAvailableCurrencies()) ) {
-			
+
 			$this->currency = $currency;
 		}
 

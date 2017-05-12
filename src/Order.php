@@ -16,14 +16,22 @@ class Order implements \JsonSerializable {
 	 * Class constructor
 	 *
 	 * @param string $id Order id
-	 * @param string $amount Order amount
-	 * @param string $currency Order currency
+	 * @param string|null $amount Order amount
+	 * @param string|null $currency Order currency
 	 */
-	public function __construct($id, $amount, $currency) {
+	public function __construct($id, $amount = null, $currency = null) {
 
 		$this->setId($id);
-		$this->setAmount($amount);
-		$this->setCurrency($currency);
+
+		if ( ! empty($amount) ) {
+
+			$this->setAmount($amount);
+		}
+
+		if ( ! empty($currency)) {
+
+			$this->setCurrency($currency);
+		}
 	}
 
 	/**
@@ -74,7 +82,7 @@ class Order implements \JsonSerializable {
 	public function setCurrency($currency) {
 
 		if ( in_array($currency, Currency::getAvailableCurrencies()) ) {
-			
+
 			$this->currency = $currency;
 		}
 
