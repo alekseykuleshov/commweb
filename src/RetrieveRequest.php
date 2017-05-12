@@ -3,7 +3,7 @@
 /**
  * Class to get info about transaction
  */
-abstract class RetrieveRequest extends RequestAbstract {
+class RetrieveRequest extends RequestAbstract {
 
 	/** @var string Api operation */
 	protected $apiOperation = 'RETRIEVE_TRANSACTION';

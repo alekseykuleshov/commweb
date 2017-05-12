@@ -235,10 +235,22 @@ abstract class RequestAbstract implements \JsonSerializable {
 	private function getApiUrl() {
 
 		$url = $this->url;
-		$url = $url . "version/" . $this->version . "/";
-		$url = $url . "merchant/" . $this->getMerchant() . "/";
-		$url = $url . "order/" . $this->order->getId() . "/";
-		$url = $url . "transaction/" . $this->transaction->getId() . "/";
+
+		if ( ! empty($this->version) ) {
+			$url = $url . "version/" . $this->version . "/";
+		}
+
+		if ( ! empty($this->merchant) ) {
+			$url = $url . "merchant/" . $this->getMerchant() . "/";
+		}
+
+		if ( ! empty($this->order) ) {
+			$url = $url . "order/" . $this->order->getId() . "/";
+		}
+
+		if ( ! empty($this->transaction) ) {
+			$url = $url . "transaction/" . $this->transaction->getId() . "/";
+		}
 
 		return $url;
 	}
