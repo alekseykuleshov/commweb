@@ -23,6 +23,16 @@ abstract class ProcessRequestAbstract extends RequestAbstract {
 	}
 
 	/**
+	 * Gets old transaction for request to process
+	 *
+	 * @return \ATDev\Commweb\Transaction
+	 */
+	public function getOldTransaction() {
+
+		return $this->oldTransaction;
+	}
+
+	/**
 	 * Specifies what has to be returned on serialization to json
 	 *
 	 * @return array Data to serialize
@@ -53,17 +63,32 @@ class RefundRequest extends ProcessRequestAbstract {
 }
 
 /**
- * Class to void the transaction
- */
-class VoidRequest extends ProcessRequestAbstract {
-
-	protected $apiOperation = 'VOID';
-}
-
-/**
  * Class to update autorization transaction
  */
 class UpdateAutorizationRequest extends ProcessRequestAbstract {
 
 	protected $apiOperation = 'UPDATE_AUTHORIZATION';
+}
+
+/**
+ * Class to void the transaction
+ */
+class VoidRequest extends ProcessRequestAbstract {
+
+	protected $apiOperation = 'VOID';
+
+	/**
+	 * Specifies what has to be returned on serialization to json
+	 *
+	 * @return array Data to serialize
+	 */
+	public function jsonSerialize() {
+
+		return [
+			"apiOperation" => $this->apiOperation,
+			"transaction" => [
+				"targetTransactionId" => $this->getOldTransaction()->getId()
+			]
+		];
+	}
 }
