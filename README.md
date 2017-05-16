@@ -41,8 +41,8 @@ use ATDev\Commweb\Card;
 ### PAY
 
 ```php
-$result = (new PayRequest("MERCHANT_ID")) // Provided my gateway
-    ->setApiPassword("API_PASSWORD") // Provided my gateway
+$result = (new PayRequest("MERCHANT_ID")) // Provided by gateway
+    ->setApiPassword("API_PASSWORD") // Provided by gateway
     ->setOrder(new Order("SOME_ORDER_ID", 55.55, "AUD")) // Order id has to be unique, amount in money format, AUD is the only one supported now
     ->setTransaction(new Transaction("SOME_TRANSACTION_ID")) // Transaction id has to be unique
     ->setSourceOfFunds(new SourceOfFundsCard(new Card("CARD_NUMBER", "EXP_MONTH", "EXP_YEAR", "CVC"))) // Self explanatory, year is 2-digit
@@ -59,8 +59,8 @@ if ( ! empty($error = $result->getError()) ) {
 ### AUTHORIZE
 
 ```php
-$result = (new AuthorizeRequest("MERCHANT_ID")) // Provided my gateway
-    ->setApiPassword("API_PASSWORD") // Provided my gateway
+$result = (new AuthorizeRequest("MERCHANT_ID")) // Provided by gateway
+    ->setApiPassword("API_PASSWORD") // Provided by gateway
     ->setOrder(new Order("SOME_ORDER_ID", 55.55, "AUD")) // Order id has to be unique, amount in money format, AUD is the only one supported now
     ->setTransaction(new Transaction("SOME_TRANSACTION_ID")) // Transaction id has to be unique
     ->setSourceOfFunds(new SourceOfFundsCard(new Card("CARD_NUMBER", "EXP_MONTH", "EXP_YEAR", "CVC"))) // Self explanatory, year is 2-digit
@@ -77,8 +77,8 @@ if ( ! empty($error = $result->getError()) ) {
 ### VOID
 
 ```php
-$result = (new VoidRequest("MERCHANT_ID")) // Provided my gateway
-    ->setApiPassword("API_PASSWORD") // Provided my gateway
+$result = (new VoidRequest("MERCHANT_ID")) // Provided by gateway
+    ->setApiPassword("API_PASSWORD") // Provided by gateway
     ->setOrder(new Order("SOME_ORDER_ID")) // Original order id
     ->setTransaction(new Transaction("SOME_TRANSACTION_ID")) // New transaction id to be created, has to be unique
     ->setOldTransaction(new Transaction(("OLD_TRANSACTION_ID")) // Original transaction id
@@ -95,8 +95,8 @@ if ( ! empty($error = $result->getError()) ) {
 ### CAPTURE
 
 ```php
-$result = (new CaptureRequest("MERCHANT_ID")) // Provided my gateway
-    ->setApiPassword("API_PASSWORD") // Provided my gateway
+$result = (new CaptureRequest("MERCHANT_ID")) // Provided by gateway
+    ->setApiPassword("API_PASSWORD") // Provided by gateway
     ->setOrder(new Order("SOME_ORDER_ID")) // Original order id
     ->setTransaction(new Transaction("SOME_TRANSACTION_ID")) // New transaction id to be created, has to be unique
     ->setOldTransaction(new Transaction("OLD_TRANSACTION_ID", 55.55, "AUD")) // Original transaction id, amount to capture in money format, AUD is the only one supported now
@@ -113,8 +113,8 @@ if ( ! empty($error = $result->getError()) ) {
 ### REFUND
 
 ```php
-$result = (new RefundRequest("MERCHANT_ID")) // Provided my gateway
-    ->setApiPassword("API_PASSWORD") // Provided my gateway
+$result = (new RefundRequest("MERCHANT_ID")) // Provided by gateway
+    ->setApiPassword("API_PASSWORD") // Provided by gateway
     ->setOrder(new Order("SOME_ORDER_ID")) // Original order id
     ->setTransaction(new Transaction("SOME_TRANSACTION_ID")) // New transaction id to be created, has to be unique
     ->setOldTransaction(new Transaction("OLD_TRANSACTION_ID", 55.55, "AUD")) // Original transaction id, amount to refund in money format, AUD is the only one supported now
