@@ -186,7 +186,17 @@ abstract class RequestAbstract implements \JsonSerializable {
 		$code = $res->getStatusCode();
 		$body = $res->getBody()->getContents();
 
-		if ( $code != 200 ) {
+		if ( ( $code < 200 ) || ($code >= 300) ) {
+
+			$this->error = $body;
+		} else {
+
+			$this->error = null;
+		}
+
+		$result = json_decode($body);
+
+		if ( ( ! isset($result->response->gatewayCode) ) || ( strtoupper(trim($result->response->gatewayCode)) != "APPROVED" ) ) {
 
 			$this->error = $body;
 		} else {
