@@ -1,6 +1,7 @@
-# Commweb api sdk
+# Commweb Direct Payment REST API SDK
 
-This is an api sdk for Commweb Payment Gateway.
+This is SDK for Direct Payment REST API of Commweb.
+Credit card payments supported only (pay, auth, capture, void, refund).
 
 ## How to use
 
