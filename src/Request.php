@@ -198,7 +198,13 @@ abstract class RequestAbstract implements \JsonSerializable {
 
 		if ( ( ! isset($result->response->gatewayCode) ) || ( strtoupper(trim($result->response->gatewayCode)) != "APPROVED" ) ) {
 
-			$this->error = $body;
+			if ( (isset($result->response->acquirerMessage) ) && ( ! empty(trim($result->response->acquirerMessage))) ) {
+
+				$this->error = trim($result->response->acquirerMessage);
+			} else {
+				
+				$this->error = 'An error has occured';
+			}
 		} else {
 
 			$this->error = null;
