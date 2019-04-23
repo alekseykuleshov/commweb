@@ -1,4 +1,4 @@
-# Commweb Direct Payment REST API SDK
+# Commweb Direct Payment REST API PHP SDK
 
 This is SDK for Direct Payment REST API of Commweb.
 Credit card payments supported only (pay, auth, capture, void, refund).
