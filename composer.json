@@ -1,6 +1,6 @@
 {
     "name": "atdev/commweb",
-    "description": "Commweb Direct Payment REST API SDK",
+    "description": "Commweb Direct Payment REST API PHP SDK",
     "keywords": ["commweb", "commbank", "commonwealthbank"],
     "homepage": "https://github.com/alekseykuleshov/commweb",
     "license": "MIT",
