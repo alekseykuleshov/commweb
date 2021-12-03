@@ -10,7 +10,7 @@ This sdk is installed via [Composer](http://getcomposer.org/). To install, simpl
 ```json
 {
     "require": {
-        "atdev/commweb": "0.1.1"
+        "atdev/commweb": "~0.1"
     }
 }
 ```
